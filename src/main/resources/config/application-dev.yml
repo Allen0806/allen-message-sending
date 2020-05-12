@@ -165,15 +165,14 @@ ribbon:  eager-load:
   okhttp:    enabled: true
 
 # 客户端Ribbon配置    
-allen-message-forwarding-server: 
-  ribbon: 
-    NFLoadBalancerClassName: 
-    NFLoadBalancerRuleClassName: 
-    NFLoadBalancerPingClassName: 
-    NIWSServerListClassName: 
-    NIWSServerListFilterClassName: 
+#allen-message-forwarding-server: 
+#  ribbon: 
+#    NFLoadBalancerClassName: 
+#    NFLoadBalancerRuleClassName: 
+#    NFLoadBalancerPingClassName: 
+#    NIWSServerListClassName: 
+#    NIWSServerListFilterClassName: 
   
-
 hystrix:
   command:
     default:
