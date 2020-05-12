@@ -15,7 +15,7 @@ import okhttp3.ConnectionPool;
 //@Configuration
 //@ConditionalOnClass(Feign.class)
 //@AutoConfigureBefore(FeignAutoConfiguration.class)
-public class FeignOkHttpConfig {
+public class FeignConfig {
 
 //	@Bean
 	public okhttp3.OkHttpClient okHttpClient() {

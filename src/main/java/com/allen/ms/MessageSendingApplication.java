@@ -16,11 +16,5 @@ public class MessageSendingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MessageSendingApplication.class, args);
 	}
-	
-	@Bean
-	@LoadBalanced
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
 
 }
