@@ -135,7 +135,7 @@ eureka:
     fetch-registry: true
     # 表示客户端需要注册的 Eureka Server 的地址。
     service-url:
-      defaultZone: http://allen:allen1234@localhost:8701/eureka/
+      defaultZone: http://allen:allen1234@${spring.cloud.client.ip-address}:8701/eureka/
       
 feign:
   okhttp:
