@@ -154,10 +154,10 @@ feign:
       enabled: true
     response:
       enabled: true
-  client:
-    config:
-      default: 
-        retryer: feign.Retryer.Default
+#  client:
+#    config:
+#      default: 
+#        retryer: feign.Retryer.Default
 
 ribbon:  eager-load:
     # 开启饿汉加载模式    enabled: true
