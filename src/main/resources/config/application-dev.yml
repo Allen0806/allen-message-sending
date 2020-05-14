@@ -138,6 +138,13 @@ eureka:
       defaultZone: http://allen:allen1234@${spring.cloud.client.ip-address}:8701/eureka/
       
 feign:
+  client:
+    config:
+      default: 
+        retryer: feign.Retryer.Default
+        connect-timeout: 3000
+        read-timeout: 5000
+        logger-level: FULL
   okhttp:
     enabled: true
   httpclient:    enabled: false
@@ -145,21 +152,28 @@ feign:
     max-connections: 200
     # 每个路由最大连接数，okHttp不起作用
     max-connections-per-route: 50
-    connection-timeout: 5
+    connection-timeout: 3000
     time-to-live: 360
-  hystrix:
-    enabled: true
   compression:
     request:
       enabled: true
     response:
       enabled: true
-#  client:
-#    config:
-#      default: 
-#        retryer: feign.Retryer.Default
+  hystrix:
+    enabled: true
+  
 
-ribbon:  eager-load:
+ribbon:
+  # 负载均衡超时时间
+  ReadTimeout: 5000
+  # ribbon请求连接的超时时间，默认值2000
+  ConnectTimeout: 3000
+  # 对当前实例的重试次数，默认0
+  MaxAutoRetries: 0
+  # 对切换实例的重试次数，默认1
+  MaxAutoRetriesNextServer: 1
+  # 对所有操作请求都进行重试,默认false
+  OkToRetryOnAllOperations: false  eager-load:
     # 开启饿汉加载模式    enabled: true
     clients:    - allen-message-forwarding-server
   okhttp:    enabled: true
@@ -175,11 +189,22 @@ ribbon:  eager-load:
   
 hystrix:
   command:
+    # 全局默认配置
     default:
+      # 线程隔离相关
       execution:
+        # 是否给方法执行设置超时时间，默认为true。一般我们不要改。
+        timeout: 
+          enable: true
         isolation:
+          # 配置请求隔离的方式，这里是默认的线程池方式。还有一种信号量的方式semaphore。
+          strategy: THREAD
           thread:
-            timeoutInMilliseconds: 6000
+            # 方式执行的超时时间，默认为1000毫秒，在实际场景中需要根据情况设置
+            timeoutInMilliseconds: 10000
+    # 实例配置
+    # HystrixCommandKey:
+    
 management:
   endpoints:
     web:
