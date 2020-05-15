@@ -1,4 +1,224 @@
+# 服务器端口号
+server:
+  port: 8090
+  servlet:
+    # 配置项目名称（默认为 /），如果配置了项目名称，那么在访问路径中要加上配置的路径
+    context-path: /
+    session:
+      # 服务器session最大超时时间(分钟)
+      timeout: 30m
+  # tomcat配置
+  tomcat:
+    # tomcat字符集
+    uri-encoding: UTF-8
+    # tomcat最大连接数
+    max-connections: 2000
+    accept-count: 5000
+    # tomcat最大线程数
+    max-threads: 1000
+    # 最大连接超时时间
+    connection-timeout: 100
+    accesslog:
+      # 启用访问日志
+      enabled: true
+      # 访问日志的格式模式
+      pattern: common
+      # 是否缓冲输出，使其仅定期刷新
+      buffered: true
+      # 创建日志文件的目录。可以绝对或相对于Tomcat基础目录（整体一定是绝对路径，windows要加盘符）
+      directory: D:/Users/allen/Develop/logs/${spring.application.name}
+      # directory: /Users/allen/Develop/logs/${spring.application.name}
+       # 日志文件名前缀
+      prefix: ${spring.application.name}-access-
+      # 要放在日志文件名中的日期格式
+      file-date-format: yyyy-MM-dd
+       # 日志文件名后缀
+      suffix: .log
+      # 是否延迟在文件名中包含日期戳，直到旋转时间
+      rename-on-rotate: false
+      # 设置请求的IP地址，主机名，协议和端口的请求属性
+      request-attributes-enabled: false
+      # 是否启用访问日志轮换
+      rotate: true
+
 spring:
-  profiles:
-    active:
-    - dev
+  application:
+    name: allen-message-sending
+  http:
+    encoding:
+      charset: UTF-8
+  main:
+    banner-mode: "off"
+  datasource:
+    # 使用druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/mydev?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&allowMultiQueries=true
+     # 配置基本属性
+    username: mydev
+    password: Mydev@1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # druid相关配置
+    druid:
+      # 配置初始化大小/最小/最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 30
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      # 一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      # 是否在连接空闲一段时间后检测其可用性
+      test-while-idle: true
+      # 是否在获得连接后检测其可用性
+      test-on-borrow: false
+      # 是否在连接放回连接池后检测其可用性
+      test-on-return: false
+      # 打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      # 监控统计过滤器stat，拦截防注入过滤器wall
+      filters: stat,wall
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+#      filter: 
+#        wall:
+#          enabled: true
+#          db-type: mysql
+#          config:
+#            # 是否允许同时执行多条语句
+#            multi-statement-allow: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        session-stat-enable: true
+      stat-view-servlet:
+         # 是否启用StatViewServlet默认值true
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: "/druid/*"
+        # 是否能够重置数据
+        reset-enable: false
+        # 需要账号密码才能访问控制台，默认为root
+        login-username: druid
+        login-password: druid
+        # IP白名单
+        allow: 127.0.0.1
+        # IP黑名单（共同存在时，deny优先于allow）
+        deny: 
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    hostname: ${spring.cloud.client.ip-address}
+    # true：实例以 IP 的形式注册；false：实例以机器 HOSTNAME 形式注册
+    prefer-ip-address: true
+    # 表示 Eureka Server 在接收到上一个心跳之后等待下一个心跳的秒数（默认 90 秒），
+    # 若不能在指定时间内收到心跳，则移除此实例，并禁止此实例的流量。
+    # 需要设置为至少高于 lease-renewal-interval-in-seconds 的值，不然会被误移除了。
+    lease-expiration-duration-in-seconds: 30
+    # 表示 Eureka Client 向 Eureka Server 发送心跳的频率（默认 30 秒），
+    # 如果在 lease-expiration-duration-in-seconds 指定的时间内未收到心跳，则移除该实例。
+    lease-renewal-interval-in-seconds: 10
+  client:
+    # Eureka Client 刷新本地缓存时间，默认30秒
+    registry-fetch-interval-seconds: 5
+    # 表示是否将自己注册到Eureka Server，默认为true。
+    register-with-eureka: true 
+    # 表示是否从Eureka Server获取注册信息，默认为true。
+    fetch-registry: true
+    # 表示客户端需要注册的 Eureka Server 的地址。
+    service-url:
+      defaultZone: http://allen:allen1234@${spring.cloud.client.ip-address}:8701/eureka/
+      
+feign:
+  client:
+    config:
+      default: 
+        retryer: feign.Retryer.Default
+        connect-timeout: 3000
+        read-timeout: 5000
+        logger-level: FULL
+  okhttp:
+    enabled: true
+  httpclient:    enabled: false
+    # 最大连接数
+    max-connections: 200
+    # 每个路由最大连接数，okHttp不起作用
+    max-connections-per-route: 50
+    connection-timeout: 3000
+    time-to-live: 360
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  hystrix:
+    enabled: true
+  
+
+ribbon:
+  # 负载均衡超时时间
+  ReadTimeout: 5000
+  # ribbon请求连接的超时时间，默认值2000
+  ConnectTimeout: 3000
+  # 对当前实例的重试次数，默认0
+  MaxAutoRetries: 0
+  # 对切换实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1
+  # 对所有操作请求都进行重试,默认false
+  OkToRetryOnAllOperations: false  eager-load:
+    # 开启饿汉加载模式    enabled: true
+    clients:    - allen-message-forwarding-server
+  okhttp:    enabled: true
+
+# 客户端Ribbon配置    
+#allen-message-forwarding-server: 
+#  ribbon: 
+#    NFLoadBalancerClassName: 
+#    NFLoadBalancerRuleClassName: 
+#    NFLoadBalancerPingClassName: 
+#    NIWSServerListClassName: 
+#    NIWSServerListFilterClassName: 
+  
+hystrix:
+  command:
+    # 全局默认配置
+    default:
+      # 线程隔离相关
+      execution:
+        # 是否给方法执行设置超时时间，默认为true。一般我们不要改。
+        timeout: 
+          enable: true
+        isolation:
+          # 配置请求隔离的方式，这里是默认的线程池方式。还有一种信号量的方式semaphore。
+          strategy: THREAD
+          thread:
+            # 方式执行的超时时间，默认为1000毫秒，在实际场景中需要根据情况设置
+            timeoutInMilliseconds: 10000
+    # 实例配置
+    # HystrixCommandKey:
+    
+# 监控端点：http://localhost:8090/actuator/hystrix.stream    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,health,info
+        
+#配置Mybatis
+mybatis:
+  # 路径都使用双星，不使用单星
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.allen.**.data
+  type-handlers-package: com.allen.**.typehandler
+  configuration:
+    # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
+    map-underscore-to-camel-case: true
+      
