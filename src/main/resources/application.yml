@@ -4,6 +4,7 @@ server:
   servlet:
     # 配置项目名称（默认为 /），如果配置了项目名称，那么在访问路径中要加上配置的路径
     context-path: /
+    encoding:      charset: UTF-8
     session:
       # 服务器session最大超时时间(分钟)
       timeout: 30m
@@ -14,8 +15,6 @@ server:
     # tomcat最大连接数
     max-connections: 2000
     accept-count: 5000
-    # tomcat最大线程数
-    max-threads: 1000
     # 最大连接超时时间
     connection-timeout: 100
     accesslog:
@@ -26,7 +25,7 @@ server:
       # 是否缓冲输出，使其仅定期刷新
       buffered: true
       # 创建日志文件的目录。可以绝对或相对于Tomcat基础目录（整体一定是绝对路径，windows要加盘符）
-      directory: D:/Users/allen/Develop/logs/${spring.application.name}
+      directory: /Users/allen/Develop/logs/${spring.application.name}
       # directory: /Users/allen/Develop/logs/${spring.application.name}
        # 日志文件名前缀
       prefix: ${spring.application.name}-access-
@@ -39,14 +38,11 @@ server:
       # 设置请求的IP地址，主机名，协议和端口的请求属性
       request-attributes-enabled: false
       # 是否启用访问日志轮换
-      rotate: true
-
+      rotate: true    threads:
+      # tomcat最大线程数      max: 1000
 spring:
   application:
     name: allen-message-sending
-  http:
-    encoding:
-      charset: UTF-8
   main:
     banner-mode: "off"
   datasource:
