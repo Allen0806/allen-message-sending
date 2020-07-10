@@ -12,6 +12,7 @@
 #  meta: http://localhost:8080
 #  # 配置文件缓存路径，默认：Mac/Linux: /opt/data/{appId}/config-cache，Windows: C:\opt\data\{appId}\config-cache
 #  cacheDir: /Users/allen/Develop/enviroment/apollo/apollo-config-cache
+
 # 服务器端口号
 server:
   port: 8730
@@ -150,7 +151,7 @@ eureka:
     fetch-registry: true
     # 表示客户端需要注册的 Eureka Server 的地址。
     service-url:
-      defaultZone: http://allen:allen1234@${spring.cloud.client.ip-address}:8701/eureka/
+      defaultZone: http://allen:allen1234@localhost:8701/eureka/
       
 feign:
   client:
