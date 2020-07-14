@@ -1,4 +1,4 @@
-package com.allen.ms.config;
+package com.allen.message.sending.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

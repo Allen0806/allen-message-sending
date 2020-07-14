@@ -1,4 +1,4 @@
-package com.allen.ms;
+package com.allen.message.sending;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

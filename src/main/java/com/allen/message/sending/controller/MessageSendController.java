@@ -1,4 +1,4 @@
-package com.allen.ms.message.controller;
+package com.allen.message.sending.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.allen.mf.message.process.dto.MessageDTO;
-import com.allen.mf.message.process.feign.MessageReceiveClient;
+import com.allen.message.forwarding.process.dto.MessageDTO;
+import com.allen.message.forwarding.process.feign.MessageReceiveClient;
 import com.allen.tool.result.BaseResult;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;

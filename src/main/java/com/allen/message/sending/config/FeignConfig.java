@@ -1,4 +1,4 @@
-package com.allen.ms.config;
+package com.allen.message.sending.config;
 
 import java.util.concurrent.TimeUnit;
 
