@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.allen.message.forwarding.process.dto.MessageDTO;
 import com.allen.message.forwarding.process.feign.MessageReceiveClient;
+import com.allen.message.forwarding.process.model.MessageDTO;
 import com.allen.tool.result.BaseResult;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
