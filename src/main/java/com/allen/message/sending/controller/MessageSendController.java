@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import com.allen.message.forwarding.process.feign.MessageReceiveClient;
 import com.allen.message.forwarding.process.model.MessageDTO;
 import com.allen.tool.result.BaseResult;
+import com.allen.tool.result.StatusCode;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
@@ -59,12 +60,8 @@ public class MessageSendController {
 	 * @return 响应对象
 	 */
 	public BaseResult<Object> sendFailure(String messageNo) {
-		BaseResult<Object> baseResult = new BaseResult<>();
-		baseResult.setStatus(BaseResult.STATUS_SYSTEM_FAILURE);
-		baseResult.setMessage("系统繁忙，请稍后再试");
 		MessageDTO message = new MessageDTO();
 		message.setMessageNo(messageNo);
-		baseResult.setData(message);
-		return baseResult;
+		return new BaseResult<>(StatusCode.SYSTEM_ERROR.getCode(), "系统繁忙，请稍后再试", message);
 	}
 }

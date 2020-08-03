@@ -32,7 +32,7 @@ server:
     max-connections: 2000
     accept-count: 5000
     # 最大连接超时时间
-    connection-timeout: 100
+    connection-timeout: 5000
     accesslog:
       # 启用访问日志
       enabled: true
