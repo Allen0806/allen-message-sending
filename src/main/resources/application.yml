@@ -41,7 +41,7 @@ server:
       # 是否缓冲输出，使其仅定期刷新
       buffered: true
       # 创建日志文件的目录。可以绝对或相对于Tomcat基础目录（整体一定是绝对路径，windows要加盘符）
-      directory: /Users/allen/Develop/logs/${spring.application.name}
+      directory: /Users/allen/Documents/Develop/logs/${spring.application.name}
       # directory: /Users/allen/Develop/logs/${spring.application.name}
        # 日志文件名前缀
       prefix: ${spring.application.name}-access-
