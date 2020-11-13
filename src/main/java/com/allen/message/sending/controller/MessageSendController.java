@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.allen.message.forwarding.process.feign.MessageForwardingClient;
-import com.allen.message.forwarding.process.model.MessageReceiveDTO;
+import com.allen.message.forwarding.process.model.MessageSendingDTO;
 import com.allen.tool.result.BaseResult;
 import com.allen.tool.result.ResultStatus;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -33,9 +33,9 @@ public class MessageSendController {
 
 	@PostMapping("/send")
 	public BaseResult<Object> send() {
-		MessageReceiveDTO message = new MessageReceiveDTO();
+		MessageSendingDTO message = new MessageSendingDTO();
 		message.setMessageNo("202005120001");
-		return messageReceiveClient.receive(message);
+		return messageReceiveClient.send(message);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class MessageSendController {
 			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"),
 			@HystrixProperty(name = "execution.isolation.strategy", value = "THREAD") }, fallbackMethod = "sendFailure")
 	public BaseResult<Object> send(@PathVariable("messageNo") String messageNo) {
-		MessageReceiveDTO message = new MessageReceiveDTO();
+		MessageSendingDTO message = new MessageSendingDTO();
 		message.setMessageNo(messageNo);
 		return restTemplate.postForObject("http://allen-message-forwarding-server/mf/process/message/receive", message,
 				BaseResult.class);
@@ -60,7 +60,7 @@ public class MessageSendController {
 	 * @return 响应对象
 	 */
 	public BaseResult<Object> sendFailure(String messageNo) {
-		MessageReceiveDTO message = new MessageReceiveDTO();
+		MessageSendingDTO message = new MessageSendingDTO();
 		message.setMessageNo(messageNo);
 		return new BaseResult<>(ResultStatus.SYSTEM_ERROR.getCode(), "系统繁忙，请稍后再试", message);
 	}
