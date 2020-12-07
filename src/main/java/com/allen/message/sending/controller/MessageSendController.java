@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.allen.message.forwarding.process.feign.MessageForwardingClient;
+import com.allen.message.forwarding.process.feign.MessageSendClient;
 import com.allen.message.forwarding.process.model.MessageSendingDTO;
 import com.allen.tool.result.BaseResult;
 import com.allen.tool.result.ResultStatus;
@@ -26,7 +26,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 public class MessageSendController {
 
 	@Autowired
-	private MessageForwardingClient messageReceiveClient;
+	private MessageSendClient messageSendClient;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -35,7 +35,7 @@ public class MessageSendController {
 	public BaseResult<Object> send() {
 		MessageSendingDTO message = new MessageSendingDTO();
 		message.setMessageNo("202005120001");
-		return messageReceiveClient.send(message);
+		return messageSendClient.send(message);
 	}
 
 	/**
