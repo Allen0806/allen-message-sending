@@ -131,11 +131,11 @@ ribbon:
   MaxAutoRetriesNextServer: 1
   # 对所有操作请求都进行重试,默认false
   OkToRetryOnAllOperations: false
-  eager-load:
-    # 开启饿汉加载模式
-    enabled: true
-    clients:
-    - allen-message-forwarding-server
+#  eager-load:
+#    # 开启饿汉加载模式
+#    enabled: false
+#    clients:
+#    - allen-message-forwarding-server
   okhttp:
     enabled: true
 

@@ -90,7 +90,7 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency> -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -102,18 +102,18 @@
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.allen</groupId>
 			<artifactId>allen-message-forwarding-client</artifactId>
 			<version>${allen-message-forwarding.version}</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
