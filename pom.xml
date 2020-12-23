@@ -14,6 +14,7 @@
 	<description>Allen Message Sending Project</description>
 	<properties>
 		<allen-message-forwarding.version>1.0.0-SNAPSHOT</allen-message-forwarding.version>
+		<allen-tools.version>1.0.0-SNAPSHOT</allen-tools.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,10 +34,10 @@
 			<groupId>com.ctrip.framework.apollo</groupId>
 			<artifactId>apollo-client</artifactId>
 		</dependency> -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -114,7 +115,11 @@
 			<artifactId>allen-message-forwarding-client</artifactId>
 			<version>${allen-message-forwarding.version}</version>
 		</dependency> -->
-		
+		<dependency>
+			<groupId>com.allen</groupId>
+			<artifactId>allen-tools</artifactId>
+			<version>${allen-tools.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

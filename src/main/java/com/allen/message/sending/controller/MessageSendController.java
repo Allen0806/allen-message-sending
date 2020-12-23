@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.allen.tool.result.BaseResult;
+
 /**
  *
  *
@@ -16,8 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageSendController {
 	
 	@PostMapping("/send")
-	public void send() {
+	public BaseResult<Object> send() {
 		System.out.println("***********发送消息*****************");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return BaseResult.success();
 	}
 
 //	@Autowired
