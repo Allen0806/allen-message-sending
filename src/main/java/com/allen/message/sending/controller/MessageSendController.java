@@ -17,18 +17,18 @@ import com.allen.tool.result.BaseResult;
 @RequestMapping("/ms")
 public class MessageSendController {
 	
-	@PostMapping("/send")
+	@PostMapping("/send/message")
 	public BaseResult<Object> send() {
 		System.out.println("***********发送消息*****************");
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return BaseResult.success();
 	}
-
+	
 //	@Autowired
 //	private MessageSendClient messageSendClient;
 //
